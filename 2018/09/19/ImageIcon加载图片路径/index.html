@@ -185,25 +185,40 @@
             </div>
             <h2 class="post-title">ImageIcon加载图片路径</h2>
             <div class="post-meta">
-                本文总共1466个字 | 您是第<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+                本文总共1483个字 | 您是第<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
         <div class="post-content markdown-body">
-            <p>##一、问题<br>    ImageIcon icon =new ImageIcon(“pic.jpg”);<br>    执行结果是icon无法显示</p>
-<p>##二、解决<br>    ImageIcon icon =new ImageIcon(“pic.jpg”);<br>    很自然的认为当前类文件和图片在同一级目录下即可。<br>    其实所谓的相对路径起点是工程的根目录，即project。<br>    这行代码执行时在project目录下查找名为pic.jpg的文件，结果当然是找不到。<br>    假如你的工程根目录为：project<br>    你的图片文件放在：project/src/images/pic.jpg</p>
-<pre><code>所以正确的调用是：
+            <h2 id="一、问题"><a href="#一、问题" class="headerlink" title="一、问题"></a>一、问题</h2><pre><code>ImageIcon icon =new ImageIcon(&quot;pic.jpg&quot;);
+执行结果是icon无法显示
+</code></pre><h2 id="二、解决"><a href="#二、解决" class="headerlink" title="二、解决"></a>二、解决</h2><pre><code>ImageIcon icon =new ImageIcon(&quot;pic.jpg&quot;);
+很自然的认为当前类文件和图片在同一级目录下即可。
+其实所谓的相对路径起点是工程的根目录，即project。
+这行代码执行时在project目录下查找名为pic.jpg的文件，结果当然是找不到。
+假如你的工程根目录为：project
+你的图片文件放在：project/src/images/pic.jpg
+
+所以正确的调用是：
 &apos;ImageIcon icon=new ImageIcon(&quot;src/images/pic.jpg&quot;);&apos;
 这行代码执行时在project目录下查找到了文件，当然也可以写成
 &apos;ImageIcon icon=new ImageIcon(&quot;./src/images/pic.jpg&quot;);&apos;
 注意两者的区别，要记住的是src是在project下的目录
 总结起来就是一句话：所谓相对路径就是相对于工程根目录的位置
-</code></pre><p>##三、其他<br>    第一种查看了一下ImageIcon的构造函数。<br>    Pulbic ImageIcon(String filename)//参数可以是绝对路径也可以是相对路径<br>    Public ImageIcon(URL url)<br>    第二种通过URL来得到图片<br>    ‘URL url =getClass().getResource(“pic.jpg”);’//当前编译后class文件所在目录查找<br>    ‘ImageIcon icon =new ImageIcon(url);’<br>    第三种可以通过图片的ID来添加图片<br>    ‘ImageIcon icon =new ImageIcon(“picture/pic_”+pictureID+”.jpg”);’</p>
-<p>##四、问题讨论<br>    出现此类问题的原因大多是路径问题，往往在项目中运行正常，但是一旦打包成jar就不能正常<br>    显示了。下面是一些常用解决方式：</p>
-<pre><code>###一、通过使用内部资源文件的方式
+</code></pre><h2 id="三、其他"><a href="#三、其他" class="headerlink" title="三、其他"></a>三、其他</h2><pre><code>第一种查看了一下ImageIcon的构造函数。
+Pulbic ImageIcon(String filename)//参数可以是绝对路径也可以是相对路径
+Public ImageIcon(URL url)
+第二种通过URL来得到图片
+&apos;URL url =getClass().getResource(&quot;pic.jpg&quot;);&apos;//当前编译后class文件所在目录查找
+&apos;ImageIcon icon =new ImageIcon(url);&apos;
+第三种可以通过图片的ID来添加图片
+&apos;ImageIcon icon =new ImageIcon(&quot;picture/pic_&quot;+pictureID+&quot;.jpg&quot;);&apos;
+</code></pre><h2 id="四、问题讨论"><a href="#四、问题讨论" class="headerlink" title="四、问题讨论"></a>四、问题讨论</h2><pre><code>出现此类问题的原因大多是路径问题，往往在项目中运行正常，但是一旦打包成jar就不能正常
+显示了。下面是一些常用解决方式：
+### 一、通过使用内部资源文件的方式
     把所用的图片文件放在项目使用的包中，打包时把图片文件同时打进jar文件中：
     ImageIcon icon = new ImageIcon(类名.class.getResource(&quot;icons/logo.jpg&quot;);//icons与&quot;类&quot;同级,相对路径
     ImageIcon icon = new ImageIcon(任一类名.class.getResource(&quot;/icons/logo.jpg&quot;);//icons位于jar包的最外层，绝对路径
-###二、通过使用内部资源文件的方式
+### 二、通过使用内部资源文件的方式
     把项目打包成jar后，再新建一文件夹，把项目中所有使用的图片文件和jar文件放在该目录下，
     只要代码对图片文件的应用路径正确，如：
     &apos;ImageIcon icon = new ImageIcon(&quot;icons/logo.jpg&quot;);&apos;
