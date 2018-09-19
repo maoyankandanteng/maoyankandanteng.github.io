@@ -49,7 +49,7 @@
 <link rel="shortcut icon" href="/images/favicon.png">
 
 
-<title>归档集- 2018/6 - 说IT</title>
+<title>imageicon加载图片路径 - 说IT</title>
 
 <meta name="keywords" content="">
 
@@ -108,8 +108,30 @@
 </div>
             <div class="page-title">
     <ul>
-        <li><a href="/" data-name="首页" title="Back Home">首页</a></li>
-        <li><a href="/tags" data-name="标签云" title="标签云">标签</a></li>
+        <li><a href="/">最新</a></li>
+        
+            
+                <li class="">
+                    <a href="/categories/big-front-end" data-name="前端">前端</a>
+                </li>
+            
+                <li class="active">
+                    <a href="/categories/server-side" data-name="后台">后台</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/resource" data-name="资源">资源</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/life" data-name="生活">生活</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/others" data-name="其他">其他</a>
+                </li>
+            
+        
         <li class="page-search">
     <form id="search" class="search-form">
         <label for="s" class="sr-only">请输入关键字</label>
@@ -151,70 +173,65 @@
 <div class="main-inner">
     <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
         <div class="post-header">
-            <h3 class="post-title">坦率的讲 - 本站目前共计4篇文章</h3>
-        </div>
-        <p><img src="/images/category-bg.jpg" alt="category-bg"></p>
-        <div class="post-content markdown-body" itemprop="articleBody">
-            <div class="archives">
-                
-                
-                
-                
-                
-                <div class="archives-item">
-                    <h2>2018年09月</h2>
-                    <ul class="archives_list">
-                        
-                        <li>19日15:47:44
-                            <a href="/2018/09/19/ImageIcon加载图片路径/">ImageIcon加载图片路径</a>
-                        </li>
-                        
-                    </ul>
-                </div>
-                
-                
-                
-                
-                
-                <div class="archives-item">
-                    <h2>2018年07月</h2>
-                    <ul class="archives_list">
-                        
-                        <li>02日15:47:44
-                            <a href="/2018/07/02/Spring Ioc概念/">Spring Ioc 概念</a>
-                        </li>
-                        
-                
-                
-                
-                        <li>02日15:47:44
-                            <a href="/2018/07/02/gltf教程（一）基础知识/">Spring Ioc 概念</a>
-                        </li>
-                        
-                    </ul>
-                </div>
-                
-                
-                
-                
-                
-                <div class="archives-item">
-                    <h2>2018年06月</h2>
-                    <ul class="archives_list">
-                        
-                        <li>14日11:20:07
-                            <a href="/2018/06/14/Quartz-CronExpression/">Quartz CronExpression</a>
-                        </li>
-                        
-                    </ul>
-                </div>
-                
-                
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="" target="_blank">
+                    <img width="48" src="/images/favicon.png" alt="avatar"/>
+                </a>
+                <p><span class="label">作者</span>
+                    <a href="" target="_blank">白海峰</a>
+                    <span title="最后编辑于2018-09-19">2018-09-19</span>
+                </p>
+                <p>一个搬代码的「伪文青」</p>
+            </div>
+            <h2 class="post-title">ImageIcon加载图片路径</h2>
+            <div class="post-meta">
+                本文总共1466个字 | 您是第<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
-    </article>
-</div>
+        <div class="post-content markdown-body">
+            <p>##一、问题<br>    ImageIcon icon =new ImageIcon(“pic.jpg”);<br>    执行结果是icon无法显示</p>
+<p>##二、解决<br>    ImageIcon icon =new ImageIcon(“pic.jpg”);<br>    很自然的认为当前类文件和图片在同一级目录下即可。<br>    其实所谓的相对路径起点是工程的根目录，即project。<br>    这行代码执行时在project目录下查找名为pic.jpg的文件，结果当然是找不到。<br>    假如你的工程根目录为：project<br>    你的图片文件放在：project/src/images/pic.jpg</p>
+<pre><code>所以正确的调用是：
+&apos;ImageIcon icon=new ImageIcon(&quot;src/images/pic.jpg&quot;);&apos;
+这行代码执行时在project目录下查找到了文件，当然也可以写成
+&apos;ImageIcon icon=new ImageIcon(&quot;./src/images/pic.jpg&quot;);&apos;
+注意两者的区别，要记住的是src是在project下的目录
+总结起来就是一句话：所谓相对路径就是相对于工程根目录的位置
+</code></pre><p>##三、其他<br>    第一种查看了一下ImageIcon的构造函数。<br>    Pulbic ImageIcon(String filename)//参数可以是绝对路径也可以是相对路径<br>    Public ImageIcon(URL url)<br>    第二种通过URL来得到图片<br>    ‘URL url =getClass().getResource(“pic.jpg”);’//当前编译后class文件所在目录查找<br>    ‘ImageIcon icon =new ImageIcon(url);’<br>    第三种可以通过图片的ID来添加图片<br>    ‘ImageIcon icon =new ImageIcon(“picture/pic_”+pictureID+”.jpg”);’</p>
+<p>##四、问题讨论<br>    出现此类问题的原因大多是路径问题，往往在项目中运行正常，但是一旦打包成jar就不能正常<br>    显示了。下面是一些常用解决方式：</p>
+<pre><code>###一、通过使用内部资源文件的方式
+    把所用的图片文件放在项目使用的包中，打包时把图片文件同时打进jar文件中：
+    ImageIcon icon = new ImageIcon(类名.class.getResource(&quot;icons/logo.jpg&quot;);//icons与&quot;类&quot;同级,相对路径
+    ImageIcon icon = new ImageIcon(任一类名.class.getResource(&quot;/icons/logo.jpg&quot;);//icons位于jar包的最外层，绝对路径
+###二、通过使用内部资源文件的方式
+    把项目打包成jar后，再新建一文件夹，把项目中所有使用的图片文件和jar文件放在该目录下，
+    只要代码对图片文件的应用路径正确，如：
+    &apos;ImageIcon icon = new ImageIcon(&quot;icons/logo.jpg&quot;);&apos;
+    这种方式下，图片文件和类文件不是一块放在包中，类文件在jar中，而图片文件夹在项目根目录下。
+</code></pre><p>详情见<a href="http://www.doc88.com/p-5015902363089.html" target="_blank" rel="noopener">dkbb</a>.</p>
 
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+            </a>
+        </div>
+        
+        <div class="post-tags">标签：
+            
+            <a href="/tags/swing/">swing</a>
+            
+            <a href="/tags/java/">java</a>
+            
+        </div>
+        
+    </article>
+    
+    <p>本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
+    
+    
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         </div><!-- end #main-->
     </div><!-- end #body -->
     <footer class="footer">

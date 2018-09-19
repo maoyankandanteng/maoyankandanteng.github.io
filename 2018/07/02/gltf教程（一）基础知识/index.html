@@ -49,7 +49,7 @@
 <link rel="shortcut icon" href="/images/favicon.png">
 
 
-<title>hello world - 说IT</title>
+<title>spring ioc 概念 - 说IT</title>
 
 <meta name="keywords" content="">
 
@@ -110,7 +110,27 @@
     <ul>
         <li><a href="/">最新</a></li>
         
-        
+            
+                <li class="">
+                    <a href="/categories/big-front-end" data-name="前端">前端</a>
+                </li>
+            
+                <li class="active">
+                    <a href="/categories/server-side" data-name="后台">后台</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/resource" data-name="资源">资源</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/life" data-name="生活">生活</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/others" data-name="其他">其他</a>
+                </li>
+            
         
         <li class="page-search">
     <form id="search" class="search-form">
@@ -155,29 +175,25 @@
         <div class="post-header">
             <div class="post-author clearfix">
                 <a class="avatar fleft" href="" target="_blank">
-                    <img width="48" src="" alt="avatar"/>
+                    <img width="48" src="/images/favicon.png" alt="avatar"/>
                 </a>
                 <p><span class="label">作者</span>
-                    <a href="" target="_blank"></a>
-                    <span title="最后编辑于2018-06-14">2018-06-14</span>
+                    <a href="" target="_blank">白海峰</a>
+                    <span title="最后编辑于2018-07-02">2018-07-02</span>
                 </p>
-                <p></p>
+                <p>一个写代码的「伪文青」</p>
             </div>
-            <h2 class="post-title">Hello World</h2>
+            <h2 class="post-title">Spring Ioc 概念</h2>
             <div class="post-meta">
-                本文总共430个字 | 您是第<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+                本文总共574个字 | 您是第<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
         <div class="post-content markdown-body">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+            <h1 id="Spring-IoC概念初步讲解"><a href="#Spring-IoC概念初步讲解" class="headerlink" title="Spring IoC概念初步讲解"></a>Spring IoC概念初步讲解</h1><h2 id="Spring-的概述"><a href="#Spring-的概述" class="headerlink" title="Spring 的概述"></a>Spring 的概述</h2><pre><code>Spring 框架可以说是Java 世界最为成功的框架，
+</code></pre><p>在企业实际应用中，大部分的企业架构都基于Spring 框架。它的成功来自于理念，而不是<br>技术，它最为核心的理念是IoC C 控制反转）和AOP （面向切面编程），其中IoC 是S pring<br>的基础，而AOP 则是其重要的功能，最为典型的当属数据库事务的使用。<br>    IOC的思想是：Spring容器来实现这些相互依赖对象的创建、协调工作。DI其实就是IOC的另外一种说法。<br>DI是由Martin Fowler 在2004年初的一篇论文中首次提出的。他总结：控制的什么被反转了？<br>就是：获得依赖对象的方式反转了</p>
+<h2 id="Spring-IoC容器的设计"><a href="#Spring-IoC容器的设计" class="headerlink" title="Spring IoC容器的设计"></a>Spring IoC容器的设计</h2><pre><code>Spring IoC 容器的设计主要是基于BeanFactory 和ApplicationContext 两个接口,
+其中ApplicationContext 是BeanFactory 的子接口之一，换句话说BeanFactory 是Spring IoC 容器
+</code></pre><p>所定义的最底层接口，而ApplicationContext 是其高级接口之一，并且对BeanFactory 功能<br>做了许多有用的扩展，所以在绝大部分的工作场景下， 都会使用ApplicationContext 作为<br>Spring IoC 容器。</p>
 
         </div>
         <div class="post-tool">
@@ -187,6 +203,8 @@
         </div>
         
         <div class="post-tags">标签：
+            
+            <a href="/tags/Spring/">Spring</a>
             
         </div>
         
